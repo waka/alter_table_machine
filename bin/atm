@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require 'commander/import'
+require 'alter_table_machine'
+
+program :name, 'alter table machine'
+program :version, AlterTableMachine::VERSION
+program :description, 'CharsetとCollationを4バイト対応させるSQLを吐き出します'
+
+default_command :help
+
+command :generate do |c|
+  c.syntax = 'atm generate [options]'
+  c.description = 'Translate and generate SQL file'
+
+  c.option '-F', '--file [FILE]', 'Before sql file'
+
+  c.action do |args, options|
+    executor = AlterTableMachine::Executor.new(options.__hash__)
+    executor.execute!
+  end
+end
+alias_command :g, :generate
