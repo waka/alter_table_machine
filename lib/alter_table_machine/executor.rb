@@ -46,7 +46,7 @@ module AlterTableMachine
             case q[:qualifier][:type]
             when 'collate'
               sql += " COLLATE utf8mb4_general_ci"
-            when 'not null'
+            when 'not_null'
               sql += " NOT NULL"
             when 'default'
               if q[:qualifier][:value][:default_value][:type] == 'string'
